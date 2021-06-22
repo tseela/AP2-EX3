@@ -40,19 +40,15 @@ public class Joystick extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int outCircleRadius = this.getMeasuredWidth() / 2;
-        if (this.getMeasuredWidth() > this.getMeasuredHeight()) {
-            outCircleRadius = this.getMeasuredHeight() / 2;
-        }
-
-        int innerCircleRadius = outCircleRadius / 2;
+        int outCircleRadius = getOutCircleRadius();
+        int innerCircleRadius = getInnerCircleRadius();
 
         int cx = this.getMeasuredWidth() / 2, cy = this.getMeasuredHeight() / 2;
 
         if (!isBetween(m_centerX, 0, this.getMeasuredWidth())
                 || !isBetween(m_centerY, 0, this.getMeasuredHeight())) {
             m_centerX = cx;
-            m_centerY = cx;
+            m_centerY = cy;
         }
 
         canvas.drawCircle(cx, cy, outCircleRadius, m_outCirclePaint);
@@ -80,10 +76,7 @@ public class Joystick extends View {
     }
 
     private boolean isOnInnerCircle(double x, double y) {
-        int radius = this.getMeasuredWidth() / 4;
-        if (this.getMeasuredWidth() > this.getMeasuredHeight()) {
-            radius = this.getMeasuredHeight() / 4;
-        }
+        int radius = getInnerCircleRadius();
 
         int centerX = this.getMeasuredWidth() / 2, centerY = this.getMeasuredHeight() / 2;
 
@@ -91,10 +84,7 @@ public class Joystick extends View {
     }
 
     private boolean isOnOutCircle(double x, double y) {
-        int radius = this.getMeasuredWidth() / 2;
-        if (this.getMeasuredWidth() > this.getMeasuredHeight()) {
-            radius = this.getMeasuredHeight() / 2;
-        }
+        int radius = getOutCircleRadius();
 
         int centerX = this.getMeasuredWidth() / 2, centerY = this.getMeasuredHeight() / 2;
 
@@ -108,4 +98,25 @@ public class Joystick extends View {
     private boolean isBetween(double num, double small, double large) {
         return small <= num && num <= large;
     }
+
+    public int getInnerCircleRadius() {
+        if (this.getMeasuredWidth() > this.getMeasuredHeight()) {
+            return this.getMeasuredHeight() / 4;
+        }
+
+        return this.getMeasuredWidth() / 4;
+    }
+    public int getOutCircleRadius() {
+        if (this.getMeasuredWidth() > this.getMeasuredHeight()) {
+            return this.getMeasuredHeight() / 2;
+        }
+
+        return this.getMeasuredWidth() / 2;
+    }
+
+    public int getJoystickCenterX() { return m_centerX; }
+    public int getJoystickCenterY() { return m_centerY; }
+
+    public void setJoystickCenterX(int x) { m_centerX = x; }
+    public void setJoystickCenterY(int y) { m_centerY = y; }
 }
