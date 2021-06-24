@@ -1,10 +1,12 @@
 package tseela.school.ap2_ex3;
 
 public class FlightViewModel implements IFlightViewModel {
+    private static final int SEEK_BAR_TICK_SCALAR = 100;
+
     private IFlightModel model;
     private String ip;
     private int port;
-    private double aileron, elevator, rudder, throttle;
+    private int aileron, elevator, rudder, throttle;
 
     public FlightViewModel() {
         model = new FlightModel();
@@ -17,22 +19,22 @@ public class FlightViewModel implements IFlightViewModel {
 
     @Override
     public void updateAileron() {
-        model.setAileron(aileron);
+        model.setAileron((double)aileron / SEEK_BAR_TICK_SCALAR);
     }
 
     @Override
     public void updateElevator() {
-        model.setElevator(elevator);
+        model.setElevator((double)elevator / SEEK_BAR_TICK_SCALAR);
     }
 
     @Override
     public void updateRudder() {
-        model.setRudder(rudder);
+        model.setRudder((double)rudder / SEEK_BAR_TICK_SCALAR);
     }
 
     @Override
     public void updateThrottle() {
-        model.setThrottle(throttle);
+        model.setThrottle((double)throttle / SEEK_BAR_TICK_SCALAR);
     }
 
     @Override
