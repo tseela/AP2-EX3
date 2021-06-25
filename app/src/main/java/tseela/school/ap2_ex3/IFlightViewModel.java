@@ -3,9 +3,9 @@ package tseela.school.ap2_ex3;
 public interface IFlightViewModel {
     boolean connect();
 
-    void updateAileron();
+    void setAileron(double aileron);
 
-    void updateElevator();
+    void setElevator(double elevator);
 
     void updateRudder();
 

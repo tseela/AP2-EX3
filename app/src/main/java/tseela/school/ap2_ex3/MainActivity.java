@@ -22,11 +22,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewModel = new FlightViewModel();
+
         etIP = findViewById(R.id.etIP);
         etPort = findViewById(R.id.etPort);
         btnConnect = findViewById(R.id.btnConnect);
         btnConnect.setOnClickListener(this);
         joystick = findViewById(R.id.joystick);
+        joystick.onChange = (double aileron, double elevator)->{
+            viewModel.setAileron(aileron);
+            viewModel.setElevator(elevator);
+        };
         sbThrottle = findViewById(R.id.sbThrottle);
         sbThrottle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -53,8 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
-
-        viewModel = new FlightViewModel();
     }
 
     @Override

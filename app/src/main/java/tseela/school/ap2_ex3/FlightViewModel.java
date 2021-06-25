@@ -4,9 +4,9 @@ public class FlightViewModel implements IFlightViewModel {
     private static final int SEEK_BAR_TICK_SCALAR = 100;
 
     private IFlightModel model;
-    private String ip;
-    private int port;
-    private int aileron, elevator, rudder, throttle;
+    public String ip;
+    public int port;
+    public int rudder, throttle;
 
     public FlightViewModel() {
         model = new FlightModel();
@@ -18,13 +18,13 @@ public class FlightViewModel implements IFlightViewModel {
     }
 
     @Override
-    public void updateAileron() {
-        model.setAileron((double)aileron / SEEK_BAR_TICK_SCALAR);
+    public void setAileron(double aileron) {
+        model.setAileron(aileron);
     }
 
     @Override
-    public void updateElevator() {
-        model.setElevator((double)elevator / SEEK_BAR_TICK_SCALAR);
+    public void setElevator(double elevator) {
+        model.setElevator(elevator);
     }
 
     @Override
