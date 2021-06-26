@@ -25,6 +25,8 @@ public class Joystick extends View {
     private int m_centerX;
     private int m_centerY;
 
+    public JoystickChangeListener onChange = null;
+
     // constructor
     public Joystick(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -93,9 +95,14 @@ public class Joystick extends View {
                         / (Math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy))) + cy);
             }
         // else, if the user releases the joystick, move it back to the middle
-        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+        }/* else if (event.getAction() == MotionEvent.ACTION_UP) {
             m_centerX = getRangeCenterX();
             m_centerY = getRangeCenterY();
+        }*/
+
+        if (onChange != null) {
+            onChange.onJoystickChange((double)(m_centerX  - getRangeCenterX()) / getOutCircleRadius(),
+                    (double)(m_centerY  - getRangeCenterY()) / getOutCircleRadius());
         }
 
         invalidate();
@@ -173,4 +180,8 @@ public class Joystick extends View {
     // setters for joystick's location
     public void setJoystickCenterX(int x) { m_centerX = x; }
     public void setJoystickCenterY(int y) { m_centerY = y; }
+
+    public static interface JoystickChangeListener {
+        void onJoystickChange(double aileron, double elevator);
+    }
 }
