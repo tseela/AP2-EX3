@@ -8,6 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <data>
+        <variable
+            android:name="viewModel"
+            android:type="tseela.school.ap2_ex3.FlightViewModel"/>
+    </data>
+
     <EditText
         android:id="@+id/etIP"
         android:layout_width="match_parent"
@@ -19,6 +25,7 @@
         android:inputType="text"
         android:textColor="@color/black"
         android:textSize="35sp"
+        android:text="@{viewModel.ip}"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -31,6 +38,7 @@
         android:layout_height="wrap_content"
         android:hint="Port:"
         android:textSize="35sp"
+        android:text="@{viewModel.port}"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:background="#ffbecf"
@@ -48,8 +56,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPort"
-        android:id="@+id/btnConnect"
-        />
+        android:id="@+id/btnConnect" />
 
     <SeekBar
         android:layout_width="300dp"
@@ -59,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnConnect"
         android:layout_margin="10dp"
         android:rotation="270"
-        android:progress="50"
+        android:progress="@{viewModel.throttle}"
         android:id="@+id/sbThrottle" />
 
     <tseela.school.ap2_ex3.Joystick
@@ -79,7 +86,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/joystick"
         android:layout_margin="10dp"
-        android:progress="50"
+        android:progress="@{viewModel.rudder}"
         android:id="@+id/sbRudder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
