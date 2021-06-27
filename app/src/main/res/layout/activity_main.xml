@@ -89,6 +89,8 @@
             app:layout_constraintTop_toBottomOf="@id/joystick"
             android:layout_margin="10dp"
             android:progress="@={viewModel.rudder}"
+            android:min="-100"
+            android:max="100"
             android:id="@+id/sbRudder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
