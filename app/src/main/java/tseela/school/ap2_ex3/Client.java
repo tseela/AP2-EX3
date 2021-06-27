@@ -24,6 +24,7 @@ public class Client implements IClient{
 
     @Override
     public void send(String message) {
+        System.out.println(message);
         out.print(message);
         out.flush();
     }

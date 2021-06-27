@@ -1,6 +1,7 @@
 package tseela.school.ap2_ex3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +10,13 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import tseela.school.ap2_ex3.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText etIP, etPort;
     private Button btnConnect;
     private Joystick joystick;
-    private SeekBar sbThrottle, sbRudder;
 
-    private IFlightViewModel viewModel;
+    private FlightViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         viewModel = new FlightViewModel();
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setViewModel(viewModel);
 
-        etIP = findViewById(R.id.etIP);
-        etPort = findViewById(R.id.etPort);
         btnConnect = findViewById(R.id.btnConnect);
         btnConnect.setOnClickListener(this);
         joystick = findViewById(R.id.joystick);
@@ -33,38 +34,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             viewModel.setAileron(aileron);
             viewModel.setElevator(elevator);
         };
-        sbThrottle = findViewById(R.id.sbThrottle);
-        sbThrottle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                viewModel.updateThrottle();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-        sbRudder = findViewById(R.id.sbRudder);
-        sbRudder.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                viewModel.updateRudder();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnConnect) {
-            if (!viewModel.connect()) {
+            if (viewModel.connect()) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT);
                 toast.show();
             }

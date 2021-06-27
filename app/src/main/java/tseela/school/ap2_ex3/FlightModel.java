@@ -65,7 +65,7 @@ public class FlightModel implements IFlightModel{
     public void setThrottle(double value) {
         if (isConnected()) {
             executorService.submit(()->{
-                fg.send("set /controls/flight/current-engine/throttle " + value + "\r\n");
+                fg.send("set /controls/engines/current-engine/throttle " + value + "\r\n");
             });
         }
     }
