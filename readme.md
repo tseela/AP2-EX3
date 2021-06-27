@@ -1,7 +1,7 @@
 # Flight Simulator Application
 ### Tal & Tse'ela
 This is our simulator application. Here, we can control a flight using our app.
-LINK-
+LINK- https://youtu.be/-CvNQ1ruI6g
 ## How Does It Work?
 We have two seekbars controlling the rudder and the throttle of the flight and a joystick controlling the aileron and the elevator of the flight.
 The user can control those three objects and this way he controls the flight's direction.
