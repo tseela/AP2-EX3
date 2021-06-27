@@ -102,7 +102,7 @@ public class Joystick extends View {
 
         if (onChange != null) {
             onChange.onJoystickChange((double)(m_centerX  - getRangeCenterX()) / getOutCircleRadius(),
-                    (double)(m_centerY  - getRangeCenterY()) / getOutCircleRadius());
+                    (double)(getRangeCenterY() - m_centerY) / getOutCircleRadius());
         }
 
         invalidate();
