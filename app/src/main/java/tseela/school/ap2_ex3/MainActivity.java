@@ -15,7 +15,6 @@ import tseela.school.ap2_ex3.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnConnect;
     private Joystick joystick;
-
     private FlightViewModel viewModel;
 
     @Override
