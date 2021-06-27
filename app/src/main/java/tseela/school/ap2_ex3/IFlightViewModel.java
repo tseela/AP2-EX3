@@ -1,7 +1,9 @@
 package tseela.school.ap2_ex3;
 
+import java.util.concurrent.ExecutionException;
+
 public interface IFlightViewModel {
-    boolean connect();
+    boolean connect() throws ExecutionException, InterruptedException;
 
     void setAileron(double aileron);
 

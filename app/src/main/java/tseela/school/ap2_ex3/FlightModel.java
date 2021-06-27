@@ -1,5 +1,6 @@
 package tseela.school.ap2_ex3;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -15,17 +16,13 @@ public class FlightModel implements IFlightModel{
     }
 
     @Override
-    public boolean connect(String ip, int port) {
+    public boolean connect(String ip, int port) throws ExecutionException, InterruptedException {
         disconnect();
         executorService = Executors.newFixedThreadPool(1);
         Future<Boolean> status = executorService.submit(()-> {
             return fg.connect(ip, port);
         });
-        try {
-            isConnected = status.get();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        isConnected = status.get();
         return isConnected;
     }
 

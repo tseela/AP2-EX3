@@ -64,9 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnConnect) {
-            if (!viewModel.connect()) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT);
-                toast.show();
+            try {
+                viewModel.connect();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -1,5 +1,7 @@
 package tseela.school.ap2_ex3;
 
+import java.util.concurrent.ExecutionException;
+
 public class FlightViewModel implements IFlightViewModel {
     private static final int SEEK_BAR_TICK_SCALAR = 100;
 
@@ -12,15 +14,9 @@ public class FlightViewModel implements IFlightViewModel {
     }
 
     @Override
-    public boolean connect() {
-        int portNum;
-        try {
-            portNum = Integer.parseInt(port);
-            return model.connect(ip, portNum);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean connect() throws ExecutionException, InterruptedException {
+        int portNum = Integer.parseInt(port);
+        return model.connect(ip, portNum);
     }
 
     @Override
